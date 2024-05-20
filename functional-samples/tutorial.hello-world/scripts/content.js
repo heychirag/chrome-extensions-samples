@@ -22,10 +22,6 @@ function displayCarbs(recipeId) {
   if (!time.innerHTML.match(/Carbs:/)) {
     time.append(` Carbs: ${carbAmount}${carbUnit}`);
   }
-
-  console.log("to display carbs in");
-  //console.log(title);
-  console.log(carbInfo);
 }
 
 let observer = new MutationObserver(mutations => {
@@ -47,11 +43,9 @@ let observer = new MutationObserver(mutations => {
           req.send();
 
         } else {
-          console.log(`${recipeId} exists in recipeData`);
           displayCarbs(recipeId);
         }
       }
-      console.log(recipes);
     }
   }
 });
