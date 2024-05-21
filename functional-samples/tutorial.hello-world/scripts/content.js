@@ -1,6 +1,7 @@
 // this is the content.js file for Hellofresh extension
 
 let recipeData = {};
+let requestSent = {};
 
 function reqListener() {
   let url = this.responseURL;
@@ -30,7 +31,7 @@ let observer = new MutationObserver(mutations => {
       let recipes = document.querySelectorAll('[data-recipe-id]');
       for (elem of recipes) {
         let recipeId = elem.getAttribute("data-recipe-id");
-        if (!(recipeId in recipeData)) {
+        if (!(recipeId in recipeData) && !(recipeId in requestSent)) {
           let url = `https://www.hellofresh.lu/gw/recipes/recipes/${recipeId}?recipeId=${recipeId}&country=lu&locale=fr-LU`;
 
           const tokenRegex = /%22access_token%22:%22(.*)%22%2C%22expires_in%22/
@@ -42,6 +43,7 @@ let observer = new MutationObserver(mutations => {
           req.setRequestHeader("Authorization", `Bearer ${authToken}`);
           req.send();
 
+          requestSent[recipeId] = true;
         } else {
           displayCarbs(recipeId);
         }
