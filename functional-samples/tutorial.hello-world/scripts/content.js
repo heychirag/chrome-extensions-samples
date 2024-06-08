@@ -18,10 +18,10 @@ function displayCarbs(recipeId) {
   let carbAmount = carbInfo["amount"];
   let carbUnit = carbInfo["unit"];
 
-  let time = recipeElem.querySelector(`[data-test-id="recipe-card-cooking-time"]`);
+  let title = recipeElem.querySelector(`[data-test-id="recipe-card-title"]`);
 
-  if (!time.innerHTML.match(/Carbs:/)) {
-    time.append(` Carbs: ${carbAmount}${carbUnit}`);
+  if (!title.innerHTML.match(/C:/)) {
+    title.prepend(`C: ${carbAmount}${carbUnit}, `);
   }
 }
 
